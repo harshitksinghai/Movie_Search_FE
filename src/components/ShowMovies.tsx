@@ -51,12 +51,20 @@ const ShowMovies: React.FC<ShowMoviesProps> = ({
                         }}
                     >
                         {movies.map((movie) => (
-                            <Card key={movie.imdbID}>
+                            <Card
+                                key={movie.imdbID}
+                                sx={{
+                                    transition: 'transform 0.3s',
+                                    '&:hover': {
+                                        transform: 'scale(1.05)',
+                                        zIndex: 1
+                                    }
+                                }}>
                                 <CardMedia
                                     component="img"
                                     image={movie.Poster !== "N/A" ? movie.Poster : placeholder}
                                     alt={movie.Title}
-                                    sx={{ 
+                                    sx={{
                                         objectFit: 'cover',
                                         width: '100%',
                                         height: '300px',

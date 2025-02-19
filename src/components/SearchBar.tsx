@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Box, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 
 interface SearchBarProps {
     onSearch: (query: string, year: string, type: string) => void;
+    initialValues: {
+        query: string;
+        year: string;
+        type: string;
+    };
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-    const [query, setQuery] = useState("");
-    const [year, setYear] = useState("");
-    const [type, setType] = useState("");
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValues }) => {
+    const [query, setQuery] = useState(initialValues.query);
+    const [year, setYear] = useState(initialValues.year);
+    const [type, setType] = useState(initialValues.type);
+
+    useEffect(() => {
+        setQuery(initialValues.query);
+        setYear(initialValues.year);
+        setType(initialValues.type);
+    }, [initialValues]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         onSearch(query.trim(), year.trim(), type);
+    };
+
+    const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+        // If query becomes empty and other fields are empty, trigger search
+        if (!newQuery && !year && !type) {
+            onSearch("", "", "");
+        }
     };
 
     return (
@@ -31,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                     label="Search Movie"
                     variant="outlined"
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={handleQueryChange}
                     required
                 />
                 <TextField
@@ -41,7 +61,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
                     sx={{ minWidth: 180 }}
-                    
                 />
                 <FormControl variant="outlined" sx={{ minWidth: 180 }}>
                     <InputLabel>Type (Optional)</InputLabel>
