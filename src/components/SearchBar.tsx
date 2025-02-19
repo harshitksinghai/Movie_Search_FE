@@ -59,6 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                     variant="contained" 
                     color="primary" 
                     type="submit"
+                    sx={{ minHeight: 55 }}
                 >
                     Search
                 </Button>

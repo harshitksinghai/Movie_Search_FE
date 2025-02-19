@@ -4,7 +4,7 @@ const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = import.meta.env.VITE_OMDB_API_URL;
 
 export const fetchMovies = async (query?: string, year?: string, type?: string, page: number = 1) => {
-    // Add console.log to debug the API call
+    
     console.log('Fetching with params:', { query, year, type, page });
     
     if (!query && !year && !type) {
@@ -18,11 +18,10 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
         if (year) url += `&y=${encodeURIComponent(year)}`;
         if (type) url += `&type=${encodeURIComponent(type)}`;
 
-        // Log the complete URL (remove for production)
         console.log('Request URL:', url);
 
         const response = await axios.get(url);
-        console.log('API Response:', response.data); // Log the response
+        console.log('API Response:', response.data);
 
         if (response.data.Response === "True") {
             return {

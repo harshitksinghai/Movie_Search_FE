@@ -42,7 +42,7 @@ const HomeScreen: React.FC = () => {
 
     const handleSearch = (query: string, year: string, type: string) => {
         if (query.trim().length < 3) {
-            setError("Title must have 3 or more characters!"); // Set error if query is less than 3 characters
+            setError("Title must have 3 or more characters!");
             return;
         }
         if (year.trim()) {

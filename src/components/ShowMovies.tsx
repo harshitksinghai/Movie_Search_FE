@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Card, CardMedia, CardContent, Typography, Skeleton, Pagination } from "@mui/material";
+import placeholder from "../assets/placeholder1.jpg";
 
 interface ShowMoviesProps {
     movies: any[];
@@ -25,7 +26,7 @@ const ShowMovies: React.FC<ShowMoviesProps> = ({
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                        gap: 3
+                        gap: 2
                     }}
                 >
                     {[...Array(10)].map((_, index) => (
@@ -46,17 +47,20 @@ const ShowMovies: React.FC<ShowMoviesProps> = ({
                         sx={{
                             display: 'grid',
                             gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                            gap: 3
+                            gap: 2
                         }}
                     >
                         {movies.map((movie) => (
                             <Card key={movie.imdbID}>
                                 <CardMedia
                                     component="img"
-                                    height="300"
-                                    image={movie.Poster !== "N/A" ? movie.Poster : "https://placehold.co/300x420"}
+                                    image={movie.Poster !== "N/A" ? movie.Poster : placeholder}
                                     alt={movie.Title}
-                                    sx={{ objectFit: 'cover' }}
+                                    sx={{ 
+                                        objectFit: 'cover',
+                                        width: '100%',
+                                        height: '300px',
+                                    }}
                                 />
                                 <CardContent>
                                     <Typography variant="h6" noWrap>{movie.Title}</Typography>
