@@ -3,7 +3,6 @@ import axios from "axios";
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = import.meta.env.VITE_OMDB_API_URL;
 
-// Popular movies and series to show on home screen
 const POPULAR_MOVIES = [
     "Avatar", "Inception", "Interstellar", "The Dark Knight",
     "Spider-Man", "Iron Man", "Black Panther", "Wonder Woman"
@@ -17,7 +16,6 @@ const POPULAR_SERIES = [
 export const fetchMovies = async (query?: string, year?: string, type?: string, page: number = 1) => {
     console.log('Fetching with params:', { query, year, type, page });
 
-    // For search functionality
     if (query) {
         try {
             let url = `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}&page=${page}`;
@@ -50,7 +48,6 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
         }
     }
     
-    // For home screen content
     else {
         try {
             const titles = type === "series" ? POPULAR_SERIES : POPULAR_MOVIES;

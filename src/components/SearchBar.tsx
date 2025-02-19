@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValues }) => {
     const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
-        // If query becomes empty and other fields are empty, trigger search
+
         if (!newQuery && !year && !type) {
             onSearch("", "", "");
         }

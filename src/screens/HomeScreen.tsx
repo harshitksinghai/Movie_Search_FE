@@ -18,7 +18,6 @@ const HomeScreen: React.FC = () => {
         fetchHomeMovieList();
     }, []);
 
-    // Monitor search params for empty state
     useEffect(() => {
         if (searchParams.query.trim() === "" && 
             searchParams.year.trim() === "" && 
@@ -30,11 +29,9 @@ const HomeScreen: React.FC = () => {
     const fetchHomeMovieList = async () => {
         setLoading(true);
         try {
-            // Fetch movies and series separately
             const moviesResult = await fetchMovies("", "", "movie");
             const seriesResult = await fetchMovies("", "", "series");
     
-            // Combine the results
             const combinedMovies = [
                 ...(moviesResult.movies || []),
                 ...(seriesResult.movies || [])
@@ -78,7 +75,6 @@ const HomeScreen: React.FC = () => {
     };
 
     const handleSearch = (query: string, year: string, type: string) => {
-        // Update search params regardless of validation
         setSearchParams({ query, year, type });
         setSearchState(true);
 
@@ -97,7 +93,6 @@ const HomeScreen: React.FC = () => {
             }
         }
 
-        // If all fields are empty, reset to home view
         if (!query.trim() && !year.trim() && !type) {
             setSearchState(false);
             fetchHomeMovieList();
