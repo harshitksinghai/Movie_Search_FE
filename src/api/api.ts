@@ -24,6 +24,7 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
 
             console.log('Request URL:', url);
             const response = await axios.get(url);
+            console.log('API Response:', response);
 
             if (response.data.Response === "True") {
                 return {
@@ -51,17 +52,20 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
     else {
         try {
             const titles = type === "series" ? POPULAR_SERIES : POPULAR_MOVIES;
-            const currentYear = new Date().getFullYear();
             
-            // Fetch first movie/series from each title
             const promises = titles.map(title => 
                 axios.get(`${API_URL}?apikey=${API_KEY}&t=${encodeURIComponent(title)}${type ? `&type=${type}` : ''}`)
             );
             
             const results = await Promise.all(promises);
+            console.log('API Promises Results:', results)
+
             const validResults = results
                 .map(response => response.data)
                 .filter(data => data.Response === "True");
+            
+            console.log('API Promises Valid Results:', results)
+            
 
             return {
                 movies: validResults,

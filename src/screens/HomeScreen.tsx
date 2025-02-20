@@ -104,7 +104,7 @@ const HomeScreen: React.FC = () => {
         fetchMovieResults(query, year, type, 1);
     };
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
         fetchMovieResults(searchParams.query, searchParams.year, searchParams.type, value);
     };
